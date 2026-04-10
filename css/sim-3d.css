@@ -1,0 +1,239 @@
+/* ═══════════════════════════════════════════════════════════
+   3D simulation side dock (Flow + Remote)
+═══════════════════════════════════════════════════════════ */
+
+.sim-resize-handle {
+  width: 6px;
+  flex-shrink: 0;
+  cursor: col-resize;
+  background: linear-gradient(90deg, transparent, rgba(230, 224, 212, 0.12), transparent);
+  transition: background var(--fast);
+  z-index: 2;
+}
+.sim-resize-handle:hover {
+  background: rgba(230, 224, 212, 0.18);
+}
+
+.sim-dock {
+  width: var(--sim-dock-width, 340px);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+  max-width: 55vw;
+  border-left: 1px solid var(--border-subtle);
+  background: linear-gradient(180deg, var(--bg-base), var(--bg-surface));
+  min-height: 0;
+}
+
+#sim-dock-flow {
+  width: var(--sim-dock-width, 340px);
+}
+
+.sim-dock-remote {
+  width: var(--sim-dock-width-remote, 300px);
+  border-left: 1px solid var(--border-subtle);
+  border-right: none;
+}
+
+.sim-dock-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: space-between;
+  padding: 8px 10px 7px;
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.sim-dock-collapse-btn {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+  color: var(--text-bright);
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color var(--fast), background var(--fast);
+}
+
+.sim-dock-collapse-btn:hover {
+  border-color: var(--text-bright);
+  background: rgba(230, 224, 212, 0.08);
+}
+
+.sim-dock-toolbar {
+  flex-shrink: 0;
+  padding: 10px 10px 8px;
+  border-bottom: 1px solid var(--border-faint);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sim-dock.collapsed .sim-dock-toolbar {
+  display: none;
+}
+
+.sim-dock.collapsed .sim-dock-header {
+  border-bottom: none;
+  padding-bottom: 8px;
+}
+
+.sim-dock-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-bright);
+}
+
+.sim-dock-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+.sim-dock-row--cam {
+  gap: 4px 8px;
+}
+
+.sim-dock-row--cam .sim-opt {
+  font-size: 9px;
+}
+
+.sim-dock-toolbar .sim-opt {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-faint);
+  border-radius: 999px;
+  padding: 2px 7px;
+}
+
+.sim-dock-label {
+  font-size: 9px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  min-width: 2.5rem;
+}
+
+.sim-opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.sim-opt input {
+  accent-color: var(--text-bright);
+}
+
+.sim-dock-mirror {
+  margin-top: 2px;
+}
+
+.sim-dock-reset {
+  margin-top: 4px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font-size: 11px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: border-color var(--fast), color var(--fast);
+}
+
+.sim-dock-reset:hover {
+  border-color: var(--text-bright);
+  color: var(--text-bright);
+}
+
+.sim-mini-btn {
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  font-size: 10px;
+  cursor: pointer;
+}
+.sim-mini-btn:hover {
+  color: var(--text-bright);
+  border-color: var(--text-bright);
+}
+.sim-mini-btn.active {
+  color: var(--text-bright);
+  border-color: var(--text-bright);
+  background: rgba(232, 227, 215, 0.12);
+}
+
+.sim-viewport-wrap {
+  flex: 1;
+  position: relative;
+  min-height: 120px;
+  background: #0f1114;
+}
+
+.sim3d-container {
+  position: absolute;
+  inset: 0;
+}
+
+.sim3d-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.sim-hud {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  pointer-events: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--text-primary);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+  max-width: min(94%, 420px);
+}
+
+.sim-hud span {
+  background: rgba(20, 22, 26, 0.84);
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border-faint);
+}
+
+.sim-hud-stats {
+  font-size: 9.5px;
+  color: var(--text-bright);
+}
+
+.sim-mirror-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  line-height: 1.35;
+}
+
+.sim-mirror-label input {
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--text-bright);
+}

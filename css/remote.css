@@ -1,0 +1,384 @@
+/* ═══════════════════════════════════════════════════════════
+   RoboFlow — Remote Control Mode Styles
+═══════════════════════════════════════════════════════════ */
+
+/* ════════════════════════════════════════
+   REMOTE PANEL LAYOUT
+════════════════════════════════════════ */
+#remote-panel {
+  --sim-dock-width-remote: 300px;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  overflow: hidden;
+  min-width: 0;
+  background: var(--bg-void);
+  background-image:
+    linear-gradient(rgba(232,227,215,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,227,215,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  gap: 0;
+}
+
+/* ════════════════════════════════════════
+   LEFT / RIGHT SECTIONS
+════════════════════════════════════════ */
+.remote-section {
+  flex: 0 0 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 32px 20px;
+  border-right: 1px solid var(--border-subtle);
+  background: rgba(30, 33, 38, 0.54);
+}
+#remote-right { border-right: none; border-left: 1px solid var(--border-subtle); }
+
+.remote-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Joystick zone */
+.joystick-zone {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle at center,
+    rgba(232,227,215,0.06) 0%,
+    rgba(232,227,215,0.03) 40%,
+    transparent 70%);
+  border: 1px solid rgba(232,227,215,0.18);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow:
+    0 0 40px rgba(232,227,215,0.08),
+    inset 0 0 20px rgba(0,0,0,0.3);
+}
+
+/* Inner ring for depth */
+.joystick-zone::before {
+  content: '';
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 1px dashed rgba(232,227,215,0.16);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.joystick-zone::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(232,227,215,0.36);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.joystick-axes {
+  position: absolute;
+  bottom: -24px;
+  display: flex;
+  gap: 16px;
+  font-size: 10px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* Joystick readout */
+.joystick-readout {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  max-width: 200px;
+}
+.readout-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+.readout-label {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.readout-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--cyan);
+  min-width: 50px;
+  text-align: right;
+}
+.readout-unit {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-left: 4px;
+}
+
+/* ════════════════════════════════════════
+   CENTER — DASHBOARD
+════════════════════════════════════════ */
+.remote-center {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* ── HUD Ring ── */
+.robot-hud {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.hud-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hud-ring {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,212,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center,
+    rgba(0,212,255,0.04),
+    rgba(0,0,0,0.4) 70%);
+  box-shadow:
+    0 0 30px rgba(0,212,255,0.1),
+    inset 0 0 20px rgba(0,0,0,0.5);
+  transition: box-shadow var(--med) var(--ease);
+  position: relative;
+}
+/* Tick marks */
+.hud-ring::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 1px dashed rgba(0,212,255,0.08);
+}
+
+.hud-ring-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.hud-speed-val {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-bright);
+  line-height: 1;
+}
+.hud-speed-unit {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+.hud-direction {
+  font-size: 20px;
+  margin-top: 4px;
+  transition: all var(--fast);
+  line-height: 1;
+}
+
+/* ── Speed control ── */
+.speed-control-wrap {
+  width: 100%;
+  max-width: 320px;
+}
+.speed-control-wrap .field-label { text-align: center; margin-bottom: 10px; }
+.slider-min, .slider-max {
+  font-size: 10px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ── Action buttons grid ── */
+.remote-action-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 12px 8px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--fast) var(--ease);
+  font-family: 'Inter', sans-serif;
+}
+.action-btn:hover {
+  border-color: var(--border-dim);
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+.action-btn:active { transform: translateY(0); }
+.action-btn.active {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: var(--cyan-dim);
+}
+
+.action-btn-icon { font-size: 18px; }
+.action-btn-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Emergency Stop */
+.action-btn.estop {
+  background: rgba(255,51,102,0.08);
+  border-color: rgba(255,51,102,0.3);
+  color: var(--red);
+  grid-column: span 1;
+}
+.action-btn.estop:hover {
+  background: rgba(255,51,102,0.15);
+  border-color: var(--red);
+  box-shadow: 0 0 14px rgba(255,51,102,0.25);
+}
+.action-btn.estop.active {
+  background: rgba(255,51,102,0.2);
+  border-color: var(--red);
+  box-shadow: 0 0 20px rgba(255,51,102,0.4);
+  animation: estopPulse 0.6s ease-in-out infinite;
+}
+@keyframes estopPulse {
+  0%, 100% { box-shadow: 0 0 16px rgba(255,51,102,0.4); }
+  50%       { box-shadow: 0 0 28px rgba(255,51,102,0.7); }
+}
+
+/* Keyboard hint */
+.keyboard-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+  opacity: 0.7;
+}
+
+/* ── Simulation log ── */
+.sim-log {
+  width: 100%;
+  max-width: 360px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.sim-log-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-faint);
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+.sim-log-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 4px var(--green);
+  animation: blink 1.5s ease-in-out infinite;
+}
+.sim-log-content {
+  height: 110px;
+  overflow-y: auto;
+  padding: 6px 0;
+}
+.sim-line {
+  padding: 3px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-faint);
+  transition: color var(--fast);
+}
+.sim-line:first-child {
+  color: var(--green);
+  font-weight: 500;
+}
+.sim-line:last-child { border-bottom: none; }
+
+/* ── Nipplejs override for custom colors ── */
+.nipple .back {
+  background: radial-gradient(circle at center,
+    rgba(0,212,255,0.15) 0%,
+    rgba(0,212,255,0.05) 60%,
+    transparent 100%) !important;
+  border-color: rgba(0,212,255,0.3) !important;
+}
+
+/* Right joystick (orange tint) */
+#remote-right .nipple .back {
+  background: radial-gradient(circle at center,
+    rgba(255,140,0,0.15) 0%,
+    rgba(255,140,0,0.05) 60%,
+    transparent 100%) !important;
+  border-color: rgba(255,140,0,0.3) !important;
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE — smaller screens
+════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .remote-section { flex: 0 0 220px; }
+  .hud-ring { width: 110px; height: 110px; }
+  .hud-speed-val { font-size: 22px; }
+  .joystick-zone { width: 160px; height: 160px; }
+}
+
+@media (max-width: 680px) {
+  #remote-panel { flex-direction: column; overflow-y: auto; }
+  .remote-section { flex: none; width: 100%; padding: 20px; }
+  #remote-right { border-left: none; border-top: 1px solid var(--border-subtle); }
+  .remote-center { padding: 16px; }
+}

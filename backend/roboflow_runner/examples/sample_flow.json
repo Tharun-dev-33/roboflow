@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "blocks": [
+    { "id": "b1", "type": "start", "x": 60, "y": 100, "params": {} },
+    {
+      "id": "b2",
+      "type": "move_forward",
+      "x": 300,
+      "y": 100,
+      "params": { "speed": 0.1, "duration": 1.0 }
+    },
+    { "id": "b3", "type": "end", "x": 520, "y": 100, "params": {} }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "sourceId": "b1",
+      "sourcePort": 0,
+      "targetId": "b2",
+      "targetPort": 0
+    },
+    {
+      "id": "c2",
+      "sourceId": "b2",
+      "sourcePort": 0,
+      "targetId": "b3",
+      "targetPort": 0
+    }
+  ]
+}
